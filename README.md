@@ -1,6 +1,6 @@
 # ansible-role-common
 
-Ansible role for installing base packages, configuring hostname and enabling/disabling IPv6.
+Ansible role for installing base packages, configuring hostname, /etc/hosts and enabling/disabling IPv6.
 
 ## Supported Platforms
 
@@ -16,7 +16,10 @@ Variables for this
 
 | variable | default value in defaults/main.yml | description |
 | -------- | ---------------------------------- | ----------- |
-| role_common_enabled | False | determine whether role is enabled (True) or not (False) |
+| role_common_enabled | False | Determine whether role is enabled (True) or not (False) |
+| common_ipv6_enabled | False | Enable (True) or disable (False) obtaining an IPv6 address for all interfaces via sysctl |
+| common_hostname | {{ ansible_hostname }} | Hostname in /etc/hostname via ansible module hostname and for /etc/hosts |
+| common_fqdn | {{ ansible_fqdn }} | FQDN for entry in /etc/hosts |
 
 ## Dependencies
 
