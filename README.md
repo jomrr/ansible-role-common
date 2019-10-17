@@ -20,6 +20,8 @@ Variables for this
 | common_ipv6_enabled | False | Enable (True) or disable (False) obtaining an IPv6 address for all interfaces via sysctl |
 | common_hostname | {{ ansible_hostname }} | Hostname in /etc/hostname via ansible module hostname and for /etc/hosts |
 | common_fqdn | {{ ansible_fqdn }} | FQDN for entry in /etc/hosts |
+| common_etc_hosts_ipv4_entries | [] | Individual IPv4 entries in /etc/hosts, i.e. for resolving static ips with dnsmasq |
+| common_etc_hosts_ipv6_entries | [] | Individual IPv6 entries in /etc/hosts, i.e. for resolving static ips with dnsmasq |
 
 ## Dependencies
 
