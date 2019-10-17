@@ -1,0 +1,8 @@
+---
+# role: ansible-role-common
+# file: vars/Suse.yml
+
+common_packages:
+  - git
+  - screen
+  - vim

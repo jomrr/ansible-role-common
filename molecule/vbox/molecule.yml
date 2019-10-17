@@ -1,0 +1,53 @@
+---
+# role: ansible-role-common
+# file: molecule/vbox/molecule.yml
+
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+    type: virtualbox
+    options:
+      gui: True
+      memory: 1024
+      cpus: 1
+      provision: True
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/shared/yamllint.yml
+platforms:
+  - name: common-arch
+    box: "archlinux/archlinux"
+  - name: common-centos7
+    box: "centos/7"
+  - name: common-debian10
+    box: "debian/buster64"
+  - name: common-ubuntu1804
+    box: "ubuntu/bionic64"
+provisioner:
+  name: ansible
+  log: True
+  lint:
+    name: ansible-lint
+  playbooks:
+    prepare: prepare.yml
+    converge: ../shared/playbook.yml
+  inventory:
+    group_vars:
+      all:
+        role_common_enabled: True
+scenario:
+  name: vbox
+verifier:
+  name: testinfra
+  env:
+    PYTHONWARNINGS: "ignore"
+  directory: ../tests
+  options:
+    v: True
+    sudo: True
+  lint:
+    name: flake8

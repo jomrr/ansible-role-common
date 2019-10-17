@@ -1,0 +1,10 @@
+---
+# role: ansible-role-common
+# file: vars/Debian.yml
+
+common_packages:
+  - apt-transport-https
+  - build-essential
+  - git
+  - screen
+  - vim

@@ -1,0 +1,8 @@
+---
+# role: ansible-role-common
+# file: vars/Archlinux.yml
+
+common_packages:
+  - git
+  - screen
+  - vim
