@@ -36,7 +36,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        role_common_enabled: True
+        common_enabled: True
 scenario:
   name: kvm
 verifier:
