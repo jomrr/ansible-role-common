@@ -3,6 +3,7 @@
 # file: vars/Alpine.yml
 
 common_packages:
+  - bash
   - git
   - screen
   - vim
