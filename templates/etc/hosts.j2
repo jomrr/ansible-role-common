@@ -1,9 +1,9 @@
 {{ ansible_managed | comment }}
-127.0.0.1   localhost
+127.0.0.1   {{ common_etc_hosts_ipv4_localhost_string }}
 {% if common_hostname == common_fqdn or common_fqdn == "" %}
-{{ ansible_default_ipv4.address }}  {{ common_hostname }}
+{{ common_etc_hosts_ipv4_address_hostname }}  {{ common_hostname }}
 {% else %}
-{{ ansible_default_ipv4.address }}  {{ common_fqdn }} {{ common_hostname }}
+{{ common_etc_hosts_ipv4_address_hostname }}  {{ common_fqdn }} {{ common_hostname }}
 {% endif %}
 {% for common_ipv4_entry in common_etc_hosts_ipv4_entries %}
 {{ common_ipv4_entry }}
@@ -11,15 +11,15 @@
 {% if common_ipv6_enabled | bool %}
 {% if ansible_default_ipv6.address  is defined %}
 {% if common_hostname == common_fqdn or common_fqdn == "" %}
-{{ ansible_default_ipv6.address }}  {{ common_hostname }}
+{{ common_etc_hosts_ipv4_address_hostname }}  {{ common_hostname }}
 {% else %}
-{{ ansible_default_ipv6.address }}  {{ common_fqdn }} {{ common_hostname }}
+{{ common_etc_hosts_ipv4_address_hostname }}  {{ common_fqdn }} {{ common_hostname }}
 {% endif %}
 {% endif %}
 {% for common_ipv6_entry in common_etc_hosts_ipv6_entries %}
 {{ common_ipv6_entry }}
 {% endfor %}
-::1     ip6-localhost ip6-loopback
+::1     {{ common_etc_hosts_ipv6_localhost_string }}
 fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
