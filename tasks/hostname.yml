@@ -2,31 +2,7 @@
 # role: ansible-role-common
 # file: tasks/hostname.yml
 
-- name: Set the hostname
+- name: "Set the hostname"
   hostname:
     name: "{{ common_hostname }}"
-  register: common_hostname_change
   when: common_hostname is not match(ansible_hostname)
-
-- name: Modify /etc/hosts
-  template:
-    src: etc/hosts.j2
-    dest: /etc/hosts
-    owner: root
-    group: root
-    mode: '0644'
-  register: common_hosts_change
-
-- name: Reboot immediately if there was a change.
-  shell: "sleep 5 && reboot"
-  async: 1
-  poll: 0
-  when: common_hostname_change is changed or common_hosts_change is changed
-
-- name: Wait for the reboot to complete if there was a change.
-  wait_for_connection:
-    connect_timeout: 20
-    sleep: 5
-    delay: 5
-    timeout: 300
-  when: common_hostname_change is changed or common_hosts_change is changed

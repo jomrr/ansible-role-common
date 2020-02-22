@@ -2,6 +2,37 @@
 # role: ansible-role-common
 # file: tasks/network.yml
 
+- name: "Check if dhcp or static configuration"
+  command: "ip r"
+  changed_when: False
+  register: common_iproute
+
+- name: "Set fact for testing ip address"
+  set_fact:
+    common_ip_test: |
+      {{ common_iproute.stdout_lines
+      | select('match', '^default .* ' ~ ansible_default_ipv4.interface ~ ' .* dhcp')
+      | list
+      | length
+      }}
+
+- name: "Set fact for dhcp test"
+  set_fact:
+    common_ip_is_dhcp: "{{ common_ip_test | int | bool }}"
+
+- name: "Set common_etc_hosts_ipv4_address_hostname when dhcp"
+  set_fact:
+    common_etc_hosts_ipv4_address_hostname: "127.0.1.1"
+  when: common_ip_is_dhcp | bool
+
+- name: "Modify /etc/hosts"
+  template:
+    src: etc/hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: "{{ common_ipv6_enabled | ternary('Enable', 'Disable') }} IPv6"
   sysctl:
     name: "{{ item }}"

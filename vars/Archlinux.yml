@@ -10,5 +10,5 @@ common_packages:
 
 common_etc_hosts_ipv4_localhost_string: "localhost"
 common_etc_hosts_ipv6_localhost_string: "localhost ip6-localhost ip6-loopback"
-common_etc_hosts_ipv4_address_hostname: "127.0.1.1"
+common_etc_hosts_ipv4_address_hostname: "{{ ansible_default_ipv4.address }}"
 common_etc_hosts_ipv6_address_hostname: "{{ ansible_default_ipv6.address }}"
