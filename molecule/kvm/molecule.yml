@@ -12,42 +12,39 @@ driver:
     options:
       memory: 2048
       cpus: 2
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/shared/yamllint.yml
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 platforms:
   - name: common-alpine310
     box: "generic/alpine310"
-  # - name: common-arch
-  #   box: "archlinux/archlinux"
-  # - name: common-centos7
-  #   box: "centos/7"
-  # - name: common-debian9
-  #   box: "debian/buster64"
+  - name: common-arch
+    box: "archlinux/archlinux"
+  - name: common-centos8
+    box: "centos/8"
+  - name: common-debian10
+    box: "debian/buster64"
+  - name: common-fedora31
+    box: "fedora/31-cloud-base"
   - name: common-ubuntu1804
     box: "generic/ubuntu1804"
 provisioner:
   name: ansible
   log: True
-  lint:
-    name: ansible-lint
   playbooks:
-    prepare: prepare.yml
-    converge: ../shared/playbook.yml
+    prepare: ../resources/playbooks/prepare.yml
+    converge: ../resources/playbooks/converge.yml
   inventory:
     group_vars:
       all:
         common_enabled: True
-scenario:
-  name: kvm
 verifier:
   name: testinfra
   env:
     PYTHONWARNINGS: "ignore"
-  directory: ../tests
+  directory: ../resources/tests
   options:
     v: True
     sudo: True
-  lint:
-    name: flake8

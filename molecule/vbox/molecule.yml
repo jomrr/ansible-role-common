@@ -9,49 +9,51 @@ driver:
   provider:
     name: virtualbox
     type: virtualbox
-    options:
-      gui: True
-      memory: 2048
-      cpus: 2
-      provision: True
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/shared/yamllint.yml
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 platforms:
   - name: common-alpine310
     box: "generic/alpine310"
+    cpus: 2
+    memory: 1024
   - name: common-arch
     box: "archlinux/archlinux"
+    cpus: 2
+    memory: 1024
   - name: common-centos8
     box: "centos/8"
+    cpus: 2
+    memory: 1024
   - name: common-debian10
     box: "debian/buster64"
+    cpus: 2
+    memory: 1024
   - name: common-fedora31
     box: "fedora/31-cloud-base"
+    cpus: 2
+    memory: 1024
   - name: common-ubuntu1804
     box: "ubuntu/bionic64"
+    cpus: 2
+    memory: 1024
 provisioner:
   name: ansible
   log: True
-  lint:
-    name: ansible-lint
   playbooks:
-    prepare: prepare.yml
-    converge: ../shared/playbook.yml
+    prepare: ../resources/playbooks/prepare.yml
+    converge: ../resources/playbooks/converge.yml
   inventory:
     group_vars:
       all:
         common_enabled: True
-scenario:
-  name: vbox
 verifier:
   name: testinfra
   env:
     PYTHONWARNINGS: "ignore"
-  directory: ../tests
+  directory: ../resources/tests
   options:
     v: True
     sudo: True
-  lint:
-    name: flake8

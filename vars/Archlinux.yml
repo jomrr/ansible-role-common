@@ -5,6 +5,7 @@
 common_packages:
   - git
   - htop
+  - iproute2
   - screen
   - vim
 

@@ -1,11 +1,10 @@
 ---
 # role: ansible-role-common
-# file: vars/RedHat.yml
+# file: vars/Oracle.yml
 
 common_packages:
   - git
   - iproute
-  - screen
   - vim
 
 common_etc_hosts_ipv4_localhost_string: "localhost localhost.localdomain localhost4 localhost4.localdomain4"
