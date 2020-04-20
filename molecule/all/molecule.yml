@@ -26,7 +26,7 @@ platforms:
     tmpfs:
       - /tmp
       - /run
-  - name: common-amazonlinux
+  - name: common-amazon
     image: "jam82/molecule-amazonlinux:latest"
     pre_build_image: True
     privileged: True
@@ -96,7 +96,7 @@ platforms:
       - /run
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: common-opensuse15
+  - name: common-suse15
     image: "jam82/molecule-openopensuse:15"
     pre_build_image: True
     privileged: True
@@ -105,7 +105,7 @@ platforms:
       - /run
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: common-opensuse
+  - name: common-suse
     image: "jam82/molecule-openopensuse:latest"
     pre_build_image: True
     privileged: True
@@ -114,7 +114,7 @@ platforms:
       - /run
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: common-opensuse-tumbleweed
+  - name: common-suse-tumbleweed
     image: "jam82/molecule-openopensuse:tumbleweed"
     pre_build_image: True
     privileged: True
@@ -123,14 +123,14 @@ platforms:
       - /run
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: common-oraclelinux6
+  - name: common-oracle6
     image: "jam82/molecule-oraclelinux:6"
     pre_build_image: True
     privileged: True
     tmpfs:
       - /tmp
       - /run
-  - name: common-oraclelinux7
+  - name: common-oracle7
     image: "jam82/molecule-oraclelinux:7"
     pre_build_image: True
     privileged: True
@@ -139,7 +139,7 @@ platforms:
       - /run
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: common-oraclelinux8
+  - name: common-oracle8
     image: "jam82/molecule-oraclelinux:8"
     pre_build_image: True
     privileged: True
@@ -148,7 +148,7 @@ platforms:
       - /run
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  - name: common-oraclelinux
+  - name: common-oracle
     image: "jam82/molecule-oraclelinux:latest"
     pre_build_image: True
     privileged: True
