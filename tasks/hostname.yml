@@ -1,8 +1,0 @@
----
-# role: ansible-role-common
-# file: tasks/hostname.yml
-
-- name: "Set the hostname"
-  hostname:
-    name: "{{ common_hostname }}"
-  when: common_hostname is not match(ansible_hostname)

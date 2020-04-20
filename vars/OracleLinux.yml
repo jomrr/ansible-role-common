@@ -1,11 +1,9 @@
 ---
 # role: ansible-role-common
-# file: vars/Archlinux.yml
+# file: vars/Oracle.yml
 
 common_packages:
   - bash
   - git
-  - htop
-  - screen
   - tmux
   - vim

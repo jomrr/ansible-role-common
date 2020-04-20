@@ -3,12 +3,8 @@
 # file: vars/RedHat.yml
 
 common_packages:
+  - bash
   - git
-  - iproute
   - screen
+  - tmux
   - vim
-
-common_etc_hosts_ipv4_localhost_string: "localhost localhost.localdomain localhost4 localhost4.localdomain4"
-common_etc_hosts_ipv6_localhost_string: "localhost localhost.localdomain localhost6 localhost6.localdomain6"
-common_etc_hosts_ipv4_address_hostname: "{{ ansible_default_ipv4.address }}"
-common_etc_hosts_ipv6_address_hostname: "{{ ansible_default_ipv6.address }}"

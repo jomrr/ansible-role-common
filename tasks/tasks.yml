@@ -18,11 +18,5 @@
 
 - name: "Install packages for ansible-role-common"
   package:
-    name: "{{ common_packages }}"
+    name: "{{ common_packages + common_custom_packages }}"
     state: present
-
-- name: "Include tasks for setting hostname"
-  include_tasks: hostname.yml
-
-- name: "Include tasks for network configuration"
-  include_tasks: network.yml

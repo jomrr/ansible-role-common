@@ -13,7 +13,7 @@ lint: |
   flake8
 platforms:
   - name: common-default
-    image: ${MOLECULE_DIST:-"jam82/ubuntu-molecule:18.04"}
+    image: ${MOLECULE_DIST:-"jam82/molecule-ubuntu:18.04"}
     command: ${MOLECULE_DOCKER_CMD:-""}
     pre_build_image: True
     privileged: True
@@ -28,10 +28,6 @@ provisioner:
   playbooks:
     prepare: ../resources/playbooks/prepare.yml
     converge: ../resources/playbooks/converge.yml
-  inventory:
-    group_vars:
-      all:
-        common_enabled: True
 verifier:
   name: testinfra
   env:

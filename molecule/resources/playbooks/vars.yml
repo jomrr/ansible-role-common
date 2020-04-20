@@ -1,0 +1,5 @@
+---
+# role: ansible-role-common
+# file: molecule/resources/playbooks/vars.yml
+
+common_role_enabled: True

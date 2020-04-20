@@ -1,27 +1,42 @@
 # ansible-role-common
 
-Ansible role for installing base packages, configuring hostname, /etc/hosts and enabling/disabling IPv6.
+**Ansible role for installing base packages and some scripts.**
 
 ## Supported Platforms
 
-* Ubuntu 18.04
+- Alpine 3.11
+- Amazonlinux 2
+- Archlinux
+- CentOS 7, 8
+- Debian 9, 10
+- Fedora 31
+- Oraclelinux 7, 8
+- Suse 15
+- Ubuntu 18.04, 20.04
 
 ## Requirements
 
-Ansible 2.7 or higher is recommended.
+Ansible 2.8 or higher is recommended.
 
 ## Variables
 
-Variables for this
+Variables for this role:
 
-| variable | default value in defaults/main.yml | description |
-| -------- | ---------------------------------- | ----------- |
-| common_enabled | False | Determine whether role is enabled (True) or not (False) |
-| common_ipv6_enabled | False | Enable (True) or disable (False) obtaining an IPv6 address for all interfaces via sysctl |
-| common_hostname | {{ ansible_hostname }} | Hostname in /etc/hostname via ansible module hostname and for /etc/hosts |
-| common_fqdn | {{ ansible_fqdn }} | FQDN for entry in /etc/hosts |
-| common_etc_hosts_ipv4_entries | [] | Individual IPv4 entries in /etc/hosts, i.e. for resolving static ips with dnsmasq |
-| common_etc_hosts_ipv6_entries | [] | Individual IPv6 entries in /etc/hosts, i.e. for resolving static ips with dnsmasq |
+```yaml
+---
+# role: ansible-role-common
+# file: defaults/main.yml
+
+# The role is disabled by default, so you do not get in trouble.
+# Checked in tasks/main.yml which includes tasks.yml if enabled.
+common_role_enabled: False
+
+# List of custom packages to be installed on systems,
+# in addition to the ones installed via the vars/*.yml files.
+# NOTE: This variable can be set in an host_vars-file to distinguish between
+# different distributions.
+common_custom_packages: []
+```
 
 ## Dependencies
 
@@ -31,22 +46,18 @@ None.
 
 ```yaml
 ---
-# role: ansible-role-common
+# playbook: all
 # file: site.yml
 
-- hosts: common_servers
+- hosts: all
   roles:
     - role: ansible-role-common
 ```
 
 ## License and Author
 
-- Author:: Jonas Mauer (<jam@kabelmail.net>)
-- Copyright:: 2019, Jonas Mauer
+- Author:: [jam82](https://github.com/jam82/)
+- Copyright:: 2020, [jam82](https://github.com/jam82/)
 
-Licensed under MIT License;
-See LICENSE file in repository.
-
-## References
-
-[ArchWiki](https://wiki.archlinux.org/)
+Licensed under [MIT License](https://opensource.org/licenses/MIT).
+See [LICENSE](https://github.com/jam82/ansible-role-hostname/blob/master/LICENSE) file in repository.
