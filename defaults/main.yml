@@ -3,11 +3,60 @@
 # file: defaults/main.yml
 
 # The role is disabled by default, so you do not get in trouble.
-# Checked in tasks/main.yml which includes tasks.yml if enabled.
-common_role_enabled: False
+# Checked in tasks/main.yml which imports tasks/tasks.yml if enabled.
+common_role_enabled: false
+
+# Enable Archlinux User Repositories.
+# AFFECTS: ansible_os_family == 'Archlinux'.
+common_aur_enabled: true
+
+# Enable Debian Backports. In Ubuntu Backports repo is enabled by default.
+# AFFECTS: ansible_distribution == 'Debian'.
+common_debian_backports_enabled: true
+
+# Package sources for Debian Backports (not Ubuntu).
+# AFFECTS: ansible_distribution == 'Debian'.
+common_debian_backports_sources:
+  - "deb https://backports.debian.org/debian-backports {{ ansible_distribution_release | lower }}-backports main contrib non-free"
+
+# Set apt-preferences files, e.g. pin-priority for repositories like Backports.
+# Use distinguished "name" tags for multiple entries, as the last one
+# will overwrite the preceeding ones with the same name (loop/template module).
+# Prio 100 means, you have to manually install a package from backports,
+# e.g. via "apt -t buster-backports install <package>".
+# "name" attribute corresponds with the file name in /etc/apt/preferences.d/.
+# Set prio to > 100 to automatically install available packages from repo.
+# AFFECTS: ansible_os_family == 'Debian'.
+common_apt_preferences_files:
+  - name: backports
+    package: '*'
+    pin: "release a={{ ansible_distribution_release | lower }}-backports"
+    priority: 100
+
+# Enable EPEL for RHEL/CentOS
+# AFFECTS: ansible_distribution == 'CentOS'.
+common_epel_enabled: true
+
+# List of AUR packages to install.
+# As AUR packages may require custom repo keys, e.g. spotify-bin,
+# this is a list of dictionaries with package name and optional key parameters.
+# AFFECTS: ansible_os_family == 'Archlinux'.
+common_packages_aur: []
+# - name: visual-studio-code-bin
+# or
+# - name: spotify-bin
+#   key: https://download.spotify.com/debian/pubkey.gpg
+# or
+# - name: spotify-bin
+#   keyid: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+# or
+# - name: spotify-bin
+#   keyid: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+#   keyserver: hkp://keyserver.ubuntu.com
 
 # List of custom packages to be installed on systems,
 # in addition to the ones installed via the vars/*.yml files.
-# NOTE: This variable can be set in an host_vars-file to distinguish between
-# different distributions.
-common_custom_packages: []
+# NOTE: This variable can be set in an host_vars- or group_vars-file
+# to distinguish between different hosts(-groups)/distributions.
+# AFFECTS: all.
+common_packages_custom: []

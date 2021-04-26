@@ -3,10 +3,10 @@
 # file: vars/Debian.yml
 
 common_packages:
-  - bash
   - apt-transport-https
   - build-essential
   - htop
+  - make
   - screen
   - tmux
   - vim

@@ -26,8 +26,7 @@ galaxy_info:
   platforms:
     - name: Alpine
       versions:
-        - 3.10
-        - 3.11
+        - 3.12
     - name: Amazon
       versions:
         - 2
@@ -42,7 +41,7 @@ galaxy_info:
         - 10
     - name: Fedora
       versions:
-        - 31
+        - 32
     - name: Oracle
       versions:
         - 7

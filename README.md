@@ -4,12 +4,13 @@
 
 ## Supported Platforms
 
-- Alpine 3.11
+- Alpine 3.11, 3.12
 - Amazonlinux 2
 - Archlinux
 - CentOS 7, 8
 - Debian 9, 10
 - Fedora 31
+- Manjaro
 - Oraclelinux 7, 8
 - Suse 15
 - Ubuntu 18.04, 20.04
@@ -53,6 +54,12 @@ None.
   roles:
     - role: ansible-role-common
 ```
+
+## Acknowledgements
+
+This role uses the [ansible-aur](https://github.com/pigmonkey/ansible-aur) module from [pigmonkey](https://github.com/pigmonkey).
+
+Thank you for putting this under MIT License and making it available.
 
 ## License and Author
 

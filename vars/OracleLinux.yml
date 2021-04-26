@@ -3,7 +3,9 @@
 # file: vars/Oracle.yml
 
 common_packages:
-  - bash
   - git
+  - make
   - tmux
   - vim
+
+common_epel_packages: []

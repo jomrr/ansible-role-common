@@ -3,9 +3,13 @@
 # file: vars/Archlinux.yml
 
 common_packages:
-  - bash
   - git
   - htop
+  - make
   - screen
   - tmux
   - vim
+
+common_aur_packages:
+  - base-devel
+  - yay

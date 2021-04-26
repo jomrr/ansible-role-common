@@ -16,7 +16,16 @@
   loop_control:
     loop_var: vars_file
 
+# This installs e.g. apt-transport-https, to enable https repo urls.
 - name: "Install packages for ansible-role-common"
   package:
-    name: "{{ common_packages + common_custom_packages }}"
+    name: "{{ common_packages }}"
     state: present
+
+# Configure specified repositories, with https by default, of course.
+- name: "Import tasks for repository installation"
+  import_tasks: repos.yml
+
+# Install custom packages of your choice after repo setup.
+- name: "Import tasks for package installation"
+  import_tasks: packages.yml

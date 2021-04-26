@@ -3,8 +3,10 @@
 # file: vars/RedHat.yml
 
 common_packages:
-  - bash
   - git
-  - screen
+  - make
   - tmux
   - vim
+
+common_epel_packages:
+  - epel-release

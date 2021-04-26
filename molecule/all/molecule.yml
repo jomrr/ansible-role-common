@@ -4,32 +4,33 @@
 
 dependency:
   name: galaxy
+  options:
+    role-file: requirements.yml
 driver:
   name: docker
 lint: |
   set -e
   yamllint .
   ansible-lint
-  flake8
 platforms:
   - name: common-alpine311
     image: "jam82/molecule-alpine:3.11"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
   - name: common-alpine
     image: "jam82/molecule-alpine:latest"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
   - name: common-amazon
     image: "jam82/molecule-amazonlinux:latest"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -37,8 +38,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-arch
     image: "jam82/molecule-archlinux:latest"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -46,8 +47,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-centos7
     image: "jam82/molecule-centos:7"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -55,8 +56,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-centos8
     image: "jam82/molecule-centos:8"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -64,8 +65,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-debian9
     image: "jam82/molecule-debian:9"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -73,8 +74,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-debian10
     image: "jam82/molecule-debian:10"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -82,8 +83,17 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-debian
     image: "jam82/molecule-debian:latest"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-fedora
+    image: "jam82/molecule-fedora:latest"
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -91,8 +101,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-suse15
     image: "jam82/molecule-opensuse:15"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -100,8 +110,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-suse
     image: "jam82/molecule-opensuse:latest"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -109,8 +119,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-suse-tumbleweed
     image: "jam82/molecule-opensuse:tumbleweed"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -118,8 +128,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-oracle7
     image: "jam82/molecule-oraclelinux:7"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -127,8 +137,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-oracle8
     image: "jam82/molecule-oraclelinux:8"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -136,8 +146,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-oracle
     image: "jam82/molecule-oraclelinux:latest"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -145,8 +155,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-ubuntu1604
     image: "jam82/molecule-ubuntu:16.04"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -154,8 +164,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-ubuntu1804
     image: "jam82/molecule-ubuntu:18.04"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -163,8 +173,8 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: common-ubuntu
     image: "jam82/molecule-ubuntu:latest"
-    pre_build_image: True
-    privileged: True
+    pre_build_image: true
+    privileged: true
     tmpfs:
       - /tmp
       - /run
@@ -172,15 +182,14 @@ platforms:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
 provisioner:
   name: ansible
-  log: True
+  log: true
   playbooks:
     prepare: ../resources/playbooks/prepare.yml
     converge: ../resources/playbooks/converge.yml
+    verify: ../resources/playbooks/verify.yml
+  inventory:
+    group_vars:
+      all:
+        common_role_enabled: true
 verifier:
-  name: testinfra
-  env:
-    PYTHONWARNINGS: "ignore"
-  directory: ../resources/tests
-  options:
-    v: True
-    sudo: True
+  name: ansible

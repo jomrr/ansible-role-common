@@ -4,9 +4,6 @@
 
 - name: Converge
   hosts: all
-  become: True
-  pre_tasks:
-    - name: "Include variables to converge playbook"
-      include_vars: vars.yml
+  become: true
   roles:
-    - role: ansible-role-common
+    - ansible-role-common

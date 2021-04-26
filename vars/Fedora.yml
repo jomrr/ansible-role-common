@@ -1,11 +1,12 @@
 ---
 # role: ansible-role-common
-# file: vars/Suse.yml
+# file: vars/Fedora.yml
 
 common_packages:
   - git
   - make
-  - htop
   - screen
   - tmux
   - vim
+
+common_epel_packages: []

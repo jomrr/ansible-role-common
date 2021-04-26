@@ -1,0 +1,33 @@
+---
+# role: ansible-role-common
+# file: tasks/repos.yml
+
+# Enable/disable Archlinux User Repositories
+- name: "{{ common_aur_enabled == true | ternary('Enable', 'Disable') }} Archlinux User Repositories"
+  block:
+    - name: "{{ common_aur_enabled == true | ternary('Install', 'Uninstall') }} AUR support"
+      package:
+        name: "{{ common_aur_packages }}"
+        state: "{{ common_aur_enabled == true | ternary('present', 'absent') }}"
+  when: ansible_os_family == 'Archlinux'
+
+# Enable/disable Debian Backports
+- name: "{{ common_backports_enabled == true | ternary('Enable', 'Disable') }} Debian Backports"
+  block:
+
+  when: ansible_distribution == 'Debian'
+
+# Enable/disable Ubuntu Backports
+- name: "{{ common_backports_enabled == true | ternary('Enable', 'Disable') }} Ubuntu Backports"
+  block:
+
+  when: ansible_distribution == 'Ubuntu'
+
+# Enable/disable EPEL Repository
+- name: "Enable EPEL Repository"
+  block:
+    - name: "Install EPEL support"
+      package:
+        name: "{{ common_epel_packages }}"
+        state: "{{ common_epel_enabled == true | ternary('present', 'absent') }}"
+  when: ansible_os_family == 'RedHat'
