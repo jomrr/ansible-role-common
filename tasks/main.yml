@@ -3,5 +3,23 @@
 # file: tasks/main.yml
 
 - name: "Tasks for role ansible-role-common"
-  import_tasks: tasks.yml
+  block:
+    - name: "Set os_family dependent variables"
+      include_vars: '{{ ansible_os_family }}.yml'
+
+    - name: "Set distribution dependent variables"
+      include_vars: "{{ vars_file }}"
+      vars:
+        params:
+          files:
+            - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+            - "{{ ansible_distribution }}.yml"
+            - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+          skip: yes
+      loop: "{{ query('first_found', params, errors='ignore') }}"
+
+    # Include parses files on runtime.
+    # Import does not work, because ansible_pkg_mgr is unknown before gather_facts.
+    - name: "Import package manager specific tasks"
+      include_tasks: "{{ ansible_pkg_mgr }}.yml"
   when: common_role_enabled | bool

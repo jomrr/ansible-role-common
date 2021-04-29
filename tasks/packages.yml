@@ -1,8 +1,0 @@
----
-# role: ansible-role-common
-# file: tasks/packages.yml
-
-- name: "Install custom packages for ansible-role-common"
-  package:
-    name: "{{ common_packages_custom }}"
-    state: present

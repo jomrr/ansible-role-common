@@ -4,4 +4,4 @@
 
 - src: https://github.com/jam82/ansible-role-baseline.git
   name: baseline
-  version: master
+  version: main

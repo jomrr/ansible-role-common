@@ -2,7 +2,7 @@
 # role: ansible-role-common
 # file: vars/Alpine.yml
 
-common_packages:
+common_base_packages:
   - git
   - make
   - screen

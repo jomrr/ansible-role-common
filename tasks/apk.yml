@@ -1,0 +1,8 @@
+---
+# role: ansible-role-common
+# file: tasks/apk.yml
+
+- name: "apk | Install base packages"
+  apk:
+    name: "{{ common_base_packages }}"
+    update_cache: yes

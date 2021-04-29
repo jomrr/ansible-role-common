@@ -1,0 +1,13 @@
+---
+# role: ansible-role-common
+# file: tasks/pacman.yml
+
+- name: "pacman | Install base packages"
+  pacman:
+    name: "{{ common_base_packages }}"
+    state: present
+
+- name: "pacman | {{ common_aur_enabled | bool | ternary('Install', 'Uninstall') }} AUR support"
+  pacman:
+    name: "{{ common_base_aur_packages }}"
+    state: "{{ common_aur_enabled | bool | ternary('present', 'absent') }}"

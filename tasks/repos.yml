@@ -3,7 +3,7 @@
 # file: tasks/repos.yml
 
 # Enable/disable Archlinux User Repositories
-- name: "{{ common_aur_enabled == true | ternary('Enable', 'Disable') }} Archlinux User Repositories"
+- name: "Archlinux | Archlinux User Repositories"
   block:
     - name: "{{ common_aur_enabled == true | ternary('Install', 'Uninstall') }} AUR support"
       package:
@@ -12,21 +12,21 @@
   when: ansible_os_family == 'Archlinux'
 
 # Enable/disable Debian Backports
-- name: "{{ common_backports_enabled == true | ternary('Enable', 'Disable') }} Debian Backports"
+- name: "Debian | Debian Backports"
   block:
 
   when: ansible_distribution == 'Debian'
 
 # Enable/disable Ubuntu Backports
-- name: "{{ common_backports_enabled == true | ternary('Enable', 'Disable') }} Ubuntu Backports"
+- name: "Ubuntu | Ubuntu Backports"
   block:
 
   when: ansible_distribution == 'Ubuntu'
 
 # Enable/disable EPEL Repository
-- name: "Enable EPEL Repository"
+- name: "RedHat | EPEL Repository"
   block:
-    - name: "Install EPEL support"
+    - name: "{{ common_epel_enabled == true | ternary('Install', 'Uninstall') }} EPEL support"
       package:
         name: "{{ common_epel_packages }}"
         state: "{{ common_epel_enabled == true | ternary('present', 'absent') }}"

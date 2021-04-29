@@ -1,0 +1,8 @@
+---
+# role: ansible-role-common
+# file: tasks/zypper.yml
+
+- name: "zypper | Install base packages"
+  zypper:
+    name: "{{ common_base_packages }}"
+    update_cache: yes

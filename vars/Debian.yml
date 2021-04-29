@@ -2,10 +2,10 @@
 # role: ansible-role-common
 # file: vars/Debian.yml
 
-common_packages:
+common_base_packages:
   - apt-transport-https
   - build-essential
-  - htop
+  - git
   - make
   - screen
   - tmux

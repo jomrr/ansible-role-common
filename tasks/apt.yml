@@ -1,0 +1,8 @@
+---
+# role: ansible-role-common
+# file: tasks/apt.yml
+
+- name: "apt | Install base packages"
+  apt:
+    name: "{{ common_base_packages }}"
+    update_cache: yes

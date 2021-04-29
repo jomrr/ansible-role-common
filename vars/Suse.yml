@@ -2,10 +2,9 @@
 # role: ansible-role-common
 # file: vars/Suse.yml
 
-common_packages:
+common_base_packages:
   - git
   - make
-  - htop
   - screen
   - tmux
   - vim
