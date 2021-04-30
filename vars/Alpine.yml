@@ -3,7 +3,9 @@
 # file: vars/Alpine.yml
 
 common_base_packages:
+  - curl
   - git
+  - gnupg
   - make
   - screen
   - tmux

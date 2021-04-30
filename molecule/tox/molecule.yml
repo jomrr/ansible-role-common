@@ -33,6 +33,6 @@ provisioner:
   inventory:
     group_vars:
       all:
-        ipv6_role_enabled: true
+        common_role_enabled: true
 verifier:
   name: ansible

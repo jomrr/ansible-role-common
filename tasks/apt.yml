@@ -2,6 +2,21 @@
 # role: ansible-role-common
 # file: tasks/apt.yml
 
+- name: "apt | Configure sources.list"
+  template:
+    src: etc/apt/sources.list.j2
+    dest: /etc/apt/sources.list
+    owner: root
+    mode: 0644
+
+- name: "apt | Configure preferences.d files"
+  template:
+    src: etc/apt/preferences.d/preferences.j2
+    dest: "/etc/apt/preferences.d/{{ item.file }}"
+    owner: root
+    mode: 0644
+  loop: "{{ common_apt_preferences }}"
+
 - name: "apt | Install base packages"
   apt:
     name: "{{ common_base_packages }}"

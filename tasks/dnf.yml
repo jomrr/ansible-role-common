@@ -2,7 +2,12 @@
 # role: ansible-role-common
 # file: tasks/dnf.yml
 
+- name: "dnf | {{ common_epel_enabled | bool | ternary('Enable', 'Disable') }} EPEL"
+  dnf:
+    name: "{{ common_epel_packages }}"
+    state: "{{ common_epel_enabled | bool | ternary('present', 'absent') }}"
+    update_cache: yes
+
 - name: "dnf | Install base packages"
   dnf:
     name: "{{ common_base_packages }}"
-    update_cache: yes

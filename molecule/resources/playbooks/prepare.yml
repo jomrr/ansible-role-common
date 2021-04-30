@@ -38,5 +38,5 @@
         update_cache: yes
       when: ansible_pkg_mgr == "zypper"
 
-  roles:  # see requirements.yml in root directory of this role
-    - baseline
+  # roles:  # see requirements.yml in root directory of this role
+  #   - baseline

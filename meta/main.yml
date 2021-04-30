@@ -5,7 +5,7 @@
 galaxy_info:
   role_name: common
   author: jam82
-  description: Ansible role for installing base packages and some scripts.
+  description: Ansible role for configuring base packages and repos.
   company: ''
 
   # If the issue tracker for your role is not on github, uncomment the

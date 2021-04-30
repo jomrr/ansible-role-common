@@ -2,7 +2,12 @@
 # role: ansible-role-common
 # file: tasks/yum.yml
 
+- name: "yum | {{ common_epel_enabled | bool | ternary('Enable', 'Disable') }} EPEL"
+  yum:
+    name: "{{ common_epel_packages }}"
+    state: "{{ common_epel_enabled | bool | ternary('present', 'absent') }}"
+    update_cache: yes
+
 - name: "yum | Install base packages"
   yum:
     name: "{{ common_base_packages }}"
-    update_cache: yes

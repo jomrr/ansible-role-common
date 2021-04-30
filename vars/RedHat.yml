@@ -3,7 +3,9 @@
 # file: vars/RedHat.yml
 
 common_base_packages:
+  - curl
   - git
+  - gpg
   - make
   - tmux
   - vim

@@ -1,9 +1,11 @@
 ---
 # role: ansible-role-common
-# file: vars/Fedora.yml
+# file: vars/Amazon.yml
 
 common_base_packages:
+  - curl
   - git
+  - gpg
   - make
   - screen
   - tmux

@@ -3,7 +3,9 @@
 # file: vars/Archlinux.yml
 
 common_base_packages:
+  - curl
   - git
+  - gnupg
   - make
   - screen
   - tmux
