@@ -13,9 +13,87 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: common-default
-    image: ${MOLECULE_DIST:-"jam82/molecule-ubuntu:20.04"}
-    command: ${MOLECULE_DOCKER_CMD:-""}
+  - name: common-alpine
+    image: "jam82/molecule-alpine:latest"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+  - name: common-amazonlinux
+    image: "jam82/molecule-amazonlinux:latest"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-arch
+    image: "jam82/molecule-archlinux:latest"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-centos
+    image: "jam82/molecule-centos:latest"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-debian
+    image: "jam82/molecule-debian:latest"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-fedora
+    image: "jam82/molecule-fedora:latest"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-opensuse
+    image: "jam82/molecule-opensuse:15"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-tumbleweed
+    image: "jam82/molecule-opensuse:tumbleweed"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-oraclelinux
+    image: "jam82/molecule-oraclelinux:latest"
+    pre_build_image: true
+    privileged: true
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: common-ubuntu
+    image: "jam82/molecule-ubuntu:latest"
     pre_build_image: true
     privileged: true
     tmpfs:

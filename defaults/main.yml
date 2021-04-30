@@ -3,21 +3,44 @@
 # file: defaults/main.yml
 
 # The role is disabled by default, so you do not get in trouble.
-# Checked in tasks/main.yml which imports tasks/tasks.yml if enabled.
+# Checked in tasks/main.yml which uses a tasks block if enabled.
 common_role_enabled: false
 
-# Enable Archlinux User Repositories.
-# AFFECTS: ansible_os_family == 'Archlinux'.
-common_aur_enabled: true
+# APT Archive types to use.
+# AFFECTS: ansible_os_family == 'Debian'.
+common_apt_archives:
+  - deb
+  # - deb-src
 
-# Enable Debian Backports. In Ubuntu Backports repo is enabled by default.
-# AFFECTS: ansible_distribution == 'Debian'.
-common_debian_backports_enabled: true
+# Components for repositories. Key is ansible_distribution.
+# AFFECTS: ansible_os_family == 'Debian'.
+common_apt_components:
+  Debian:
+    - main
+    - contrib
+    - non-free
+  Ubuntu:
+    - main
+    - restricted
+    - universe
+    - multiverse
 
-# Package sources for Debian Backports (not Ubuntu).
+# APT repositories to enable/disable.
+#
+# AFFECTS: ansible_os_family == 'Debian'.
+common_apt_enable_backports: true
+#
 # AFFECTS: ansible_distribution == 'Debian'.
-common_debian_backports_sources:
-  - "deb https://backports.debian.org/debian-backports {{ ansible_distribution_release | lower }}-backports main contrib non-free"
+common_apt_enable_debug: false
+#
+# AFFECTS: ansible_distribution == 'Ubuntu'.
+common_apt_enable_proposed: false
+#
+# AFFECTS: ansible_distribution == 'Debian'.
+common_apt_enable_security: true
+#
+# AFFECTS: ansible_os_family == 'Debian'.
+common_apt_enable_updates: true
 
 # Set apt-preferences files, e.g. pin-priority for repositories like Backports.
 # Use distinguished "name" tags for multiple entries, as the last one
@@ -25,38 +48,44 @@ common_debian_backports_sources:
 # Prio 100 means, you have to manually install a package from backports,
 # e.g. via "apt -t buster-backports install <package>".
 # "name" attribute corresponds with the file name in /etc/apt/preferences.d/.
-# Set prio to > 100 to automatically install available packages from repo.
+# Set prio to > 500 to automatically install available packages from repo.
 # AFFECTS: ansible_os_family == 'Debian'.
-common_apt_preferences_files:
-  - name: backports
+common_apt_preferences:
+  - file: backports
     package: '*'
     pin: "release a={{ ansible_distribution_release | lower }}-backports"
     priority: 100
 
-# Enable EPEL for RHEL/CentOS
-# AFFECTS: ansible_distribution == 'CentOS'.
-common_epel_enabled: true
+# APT repository base urls.
+# AFFECTS: ansible_os_family == 'Debian'.
+common_apt_repo_base_urls:
+  Debian: http://ftp.de.debian.org
+  Ubuntu: http://de.archive.ubuntu.com
+
+# Enable Archlinux User Repositories.
+# AFFECTS: ansible_os_family == 'Archlinux'.
+common_aur_enabled: true
 
 # List of AUR packages to install.
 # As AUR packages may require custom repo keys, e.g. spotify-bin,
 # this is a list of dictionaries with package name and optional key parameters.
 # AFFECTS: ansible_os_family == 'Archlinux'.
-common_packages_aur: []
+common_aur_packages: []
 # - name: visual-studio-code-bin
 # or
-# - name: spotify-bin
-#   key: https://download.spotify.com/debian/pubkey.gpg
+# - name: spotify
+#   keyid: 8FD3D9A8D3800305A9FFF259D1742AD60D811D58
 # or
-# - name: spotify-bin
-#   keyid: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
-# or
-# - name: spotify-bin
-#   keyid: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
-#   keyserver: hkp://keyserver.ubuntu.com
+# - name: spotify
+#   key: https://download.spotify.com/debian/pubkey_0D811D58.gpg
+
+# Enable EPEL for RHEL/CentOS
+# AFFECTS: ansible_distribution == 'CentOS' and 'RedHat'.
+common_epel_enabled: true
 
 # List of custom packages to be installed on systems,
-# in addition to the ones installed via the vars/*.yml files.
+# in addition to the ones installed via vars.
 # NOTE: This variable can be set in an host_vars- or group_vars-file
 # to distinguish between different hosts(-groups)/distributions.
 # AFFECTS: all.
-common_packages_custom: []
+common_install: []

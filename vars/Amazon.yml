@@ -1,6 +1,6 @@
 ---
 # role: ansible-role-common
-# file: vars/Oracle.yml
+# file: vars/Fedora.yml
 
 common_base_packages:
   - curl

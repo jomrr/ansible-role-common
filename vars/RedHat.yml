@@ -2,8 +2,10 @@
 # role: ansible-role-common
 # file: vars/RedHat.yml
 
-common_packages:
+common_base_packages:
+  - curl
   - git
+  - gpg
   - make
   - tmux
   - vim

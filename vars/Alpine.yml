@@ -2,8 +2,10 @@
 # role: ansible-role-common
 # file: vars/Alpine.yml
 
-common_packages:
+common_base_packages:
+  - curl
   - git
+  - gnupg
   - make
   - screen
   - tmux

@@ -1,0 +1,83 @@
+---
+# role: ansible-role-common
+# file: tasks/pacman.yml
+
+- name: "pacman | Install base packages"
+  pacman:
+    name: "{{ common_base_packages }}"
+    update_cache: yes
+    state: present
+
+- name: "pacman | {{ common_aur_enabled | bool | ternary('Install', 'Uninstall') }} AUR support"
+  pacman:
+    name: "{{ common_base_aur_packages }}"
+    state: "{{ common_aur_enabled | bool | ternary('present', 'absent') }}"
+
+- name: "pacman | Install AUR packages"
+  block:
+    - name: "pacman | AUR | Setup the aur_builder user"
+      user:
+        name: aur_builder
+        create_home: yes
+        home: /var/lib/aur_builder
+        password: '!'
+        shell: '/bin/nologin'
+        system: yes
+        uid: 576
+      changed_when: false
+
+    - name: "pacman | AUR | Add aur_builder to sudoers.d"
+      lineinfile:
+        path: /etc/sudoers.d/aur_builder
+        state: present
+        line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+        create: yes
+        owner: root
+        mode: 0600
+        validate: /usr/sbin/visudo -cf %s
+      changed_when: false
+
+    - name: "pacman | AUR | Receive custom signing keys"
+      become: true
+      become_user: aur_builder
+      shell: |
+        set -o pipefail && \
+        gpg --receive-keys {{ item.keyid }}
+      loop: "{{ common_aur_packages }}"
+      when: item.keyid | default('') | length > 0
+      changed_when: false
+
+    - name: "pacman | AUR | Download custom signing key files"
+      become: true
+      become_user: aur_builder
+      shell: |
+        set -o pipefail && \
+        curl -sS {{ item.key }} | gpg --import -
+      loop: "{{ common_aur_packages }}"
+      when: item.key | default('') | length > 0
+      changed_when: false
+
+    - name: "pacman | AUR | Install AUR packages"
+      aur:
+        name: "{{ item.name }}"
+        user: aur_builder
+      loop: "{{ common_aur_packages }}"
+
+    - name: "Kill all user processes of aur_builder"
+      shell: |
+        set -o pipefail && killall --user aur_builder || true
+      changed_when: false
+
+    - name: "pacman | AUR | Remove aur_builder from sudoers.d"
+      file:
+        path: /etc/sudoers.d/aur_builder
+        state: absent
+      changed_when: false
+
+    - name: "pacman | AUR | Remove aur_builder user"
+      user:
+        name: aur_builder
+        remove: yes
+        state: absent
+      changed_when: false
+  when: common_aur_enabled | bool and common_aur_packages | default([]) | length > 0

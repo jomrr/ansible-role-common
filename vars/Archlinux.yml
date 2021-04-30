@@ -2,14 +2,14 @@
 # role: ansible-role-common
 # file: vars/Archlinux.yml
 
-common_packages:
+common_base_packages:
+  - curl
   - git
-  - htop
+  - gnupg
   - make
   - screen
   - tmux
   - vim
 
-common_aur_packages:
+common_base_aur_packages:
   - base-devel
-  - yay

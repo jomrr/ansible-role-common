@@ -2,10 +2,11 @@
 # role: ansible-role-common
 # file: vars/Suse.yml
 
-common_packages:
+common_base_packages:
+  - curl
   - git
+  - gpg
   - make
-  - htop
   - screen
   - tmux
   - vim

@@ -1,0 +1,26 @@
+# {{ template_destpath }}
+# vim: set noai sw=4 tw=4 ts=4 et:
+# {{ ansible_managed }}
+
+{% for archive in common_apt_archives %}
+{{ archive }} {{ common_apt_repo_base_urls[ansible_distribution] }}/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} {{ common_apt_components[ansible_distribution] | join(' ') }}
+{% if common_apt_enable_backports | bool %}
+{{ archive }} {{ common_apt_repo_base_urls[ansible_distribution] }}/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }}-backports {{ common_apt_components[ansible_distribution] | join(' ') }}
+{% endif %}
+{% if common_apt_enable_updates | bool %}
+{{ archive }} {{ common_apt_repo_base_urls[ansible_distribution] }}/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }}-updates {{ common_apt_components[ansible_distribution] | join(' ') }}
+{% endif %}
+{% if common_apt_enable_debug | bool and ansible_distribution == 'Debian' %}
+{{ archive }} {{ common_apt_repo_base_urls[ansible_distribution] }}/{{ ansible_distribution|lower }}-debug {{ ansible_distribution_release|lower }}-debug {{ common_apt_components[ansible_distribution] | join(' ') }}
+{%  if common_apt_enable_backports | bool %}
+{{ archive }} {{ common_apt_repo_base_urls[ansible_distribution] }}/{{ ansible_distribution|lower }}-debug {{ ansible_distribution_release|lower }}-backports-debug {{ common_apt_components[ansible_distribution] | join(' ') }}
+{%  endif %}
+{% endif %}
+{% if common_apt_enable_security | bool and ansible_distribution == 'Debian' %}
+{%  if ansible_distribution_release | lower == 'bullseye' or ansible_distribution_release | lower == 'testing' %}
+{{ archive }} {{ common_apt_repo_base_urls[ansible_distribution] }}/{{ ansible_distribution|lower }}-security {{ ansible_distribution_release|lower }}-security {{ common_apt_components[ansible_distribution] | join(' ') }}
+{%  else %}
+{{ archive }} {{ common_apt_repo_base_urls[ansible_distribution] }}/{{ ansible_distribution|lower }}-security {{ ansible_distribution_release|lower }}/updates {{ common_apt_components[ansible_distribution] | join(' ') }}
+{%  endif %}
+{% endif%}
+{% endfor %}
