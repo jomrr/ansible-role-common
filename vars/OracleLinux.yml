@@ -3,6 +3,7 @@
 # file: vars/Oracle.yml
 
 common_base_packages:
+  - ca-certificates
   - curl
   - git
   - gpg

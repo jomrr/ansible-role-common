@@ -3,6 +3,7 @@
 # file: vars/Fedora.yml
 
 common_base_packages:
+  - ca-certificates
   - curl
   - git
   - gpg
