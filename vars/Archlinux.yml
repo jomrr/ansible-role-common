@@ -3,6 +3,7 @@
 # file: vars/Archlinux.yml
 
 common_base_packages:
+  - ca-certificates
   - curl
   - git
   - gnupg
