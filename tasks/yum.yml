@@ -6,7 +6,7 @@
   yum:
     name: "{{ common_epel_packages }}"
     state: "{{ common_epel_enabled | bool | ternary('present', 'absent') }}"
-    update_cache: yes
+    update_cache: true
 
 - name: "yum | Install base packages"
   yum:

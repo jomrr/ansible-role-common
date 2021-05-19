@@ -5,4 +5,4 @@
 - name: "apk | Install base packages"
   apk:
     name: "{{ common_base_packages }}"
-    update_cache: yes
+    update_cache: true

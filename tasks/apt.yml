@@ -20,4 +20,4 @@
 - name: "apt | Install base packages"
   apt:
     name: "{{ common_base_packages }}"
-    update_cache: yes
+    update_cache: true

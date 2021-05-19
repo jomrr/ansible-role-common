@@ -5,7 +5,7 @@
 - name: "pacman | Install base packages"
   pacman:
     name: "{{ common_base_packages }}"
-    update_cache: yes
+    update_cache: true
     state: present
 
 - name: "pacman | {{ common_aur_enabled | bool | ternary('Install', 'Uninstall') }} AUR support"
@@ -18,11 +18,11 @@
     - name: "pacman | AUR | Setup the aur_builder user"
       user:
         name: aur_builder
-        create_home: yes
+        create_home: true
         home: /var/lib/aur_builder
         password: '!'
         shell: '/bin/nologin'
-        system: yes
+        system: true
         uid: 576
       changed_when: false
 
@@ -31,7 +31,7 @@
         path: /etc/sudoers.d/aur_builder
         state: present
         line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
-        create: yes
+        create: true
         owner: root
         mode: 0600
         validate: /usr/sbin/visudo -cf %s
@@ -77,7 +77,7 @@
     - name: "pacman | AUR | Remove aur_builder user"
       user:
         name: aur_builder
-        remove: yes
+        remove: true
         state: absent
       changed_when: false
   when: common_aur_enabled | bool and common_aur_packages | default([]) | length > 0
