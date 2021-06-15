@@ -15,7 +15,7 @@ lint: |
 platforms:
   - name: common-${TOX_ENVNAME:-"default"}
     image: ${MOLECULE_IMG:-"jam82/molecule-debian:11"}
-    command: ${MOLECULE_IMG_CMD:-""}
+    command: ~
     pre_build_image: true
     privileged: true
     tmpfs:
@@ -27,7 +27,6 @@ provisioner:
   name: ansible
   log: true
   playbooks:
-    prepare: ../resources/playbooks/prepare.yml
     converge: ../resources/playbooks/converge.yml
     verify: ../resources/playbooks/verify.yml
   inventory:

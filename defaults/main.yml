@@ -46,10 +46,26 @@ common_apt_enable_updates: true
 # Use distinguished "name" tags for multiple entries, as the last one
 # will overwrite the preceeding ones with the same name (loop/template module).
 # Prio 100 means, you have to manually install a package from backports,
-# e.g. via "apt -t buster-backports install <package>".
+# e.g. via "apt -t buster-backports install <package>" if pkg is in stable.
 # "name" attribute corresponds with the file name in /etc/apt/preferences.d/.
 # Set prio to > 500 to automatically install available packages from repo.
 # AFFECTS: ansible_os_family == 'Debian'.
+#
+# Example for installing free-ipa-client from sid/unstable on Debian:
+# - file: stable
+#   package: '*'
+#   pin: release a=stable
+#   priority: 900
+# - file: testing
+#   package: '*'
+#   pin: release a=testing
+#   priority: 400
+# - file: unstable
+#   package: '*'
+#   pin: release a=unstable
+#   priority: 50
+# With this you can issue "apt -t unstable install free-ipa-client" or better...
+# use an ansible-role :) to do it.
 common_apt_preferences:
   - file: backports
     package: '*'
