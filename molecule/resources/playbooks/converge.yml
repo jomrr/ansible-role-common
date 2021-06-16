@@ -6,5 +6,7 @@
   hosts: all
   become: true
   gather_facts: true
+  vars:
+    common_role_enabled: true
   roles:
-    - role: '../ansible-role-common'
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}"
