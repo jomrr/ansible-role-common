@@ -1,6 +1,6 @@
 ---
-# role: ansible-role-test
-# file: molecule/tox/collections.yml
+# role: ansible-role-common
+# file: molecule/tox/requirements.yml
 
 collections:
   - community.docker

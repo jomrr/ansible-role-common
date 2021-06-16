@@ -1,6 +1,6 @@
 # ansible-role-common
 
-![GitHub](https://img.shields.io/github/license/jam82/ansible-role-common) ![GitHub last commit](https://img.shields.io/github/last-commit/jam82/ansible-role-common) ![GitHub issues](https://img.shields.io/github/issues-raw/jam82/ansible-role-common) [![Molecule](https://github.com/jam82/ansible-role-common/actions/workflows/molecule.yml/badge.svg)](https://github.com/jam82/ansible-role-common/actions/workflows/molecule.yml)
+![GitHub](https://img.shields.io/github/license/jam82/ansible-role-common) ![GitHub last commit](https://img.shields.io/github/last-commit/jam82/ansible-role-common) ![GitHub issues](https://img.shields.io/github/issues-raw/jam82/ansible-role-common) ![Travis (.com) branch](https://img.shields.io/travis/com/jam82/ansible-role-common/main?label=travis) [![Molecule](https://github.com/jam82/ansible-role-common/actions/workflows/molecule.yml/badge.svg)](https://github.com/jam82/ansible-role-common/actions/workflows/molecule.yml)
 
 **Ansible role for configuring base packages and repos.**
 
@@ -8,14 +8,14 @@
 
 | OS Family | Distribution  | Latest | Supported Version(s) | Comment |
 |-----------|---------------|--------|----------------------|---------|
-| Alpine    | Alpine        | :heavy_check_mark: | 3.11, 3.12, 3.13 | |
+| Alpine    | Alpine        | :heavy_check_mark: | 3.12, 3.13 | |
 | Archlinux | Archlinux     | :heavy_check_mark: | - | |
 |           | Manjaro       | :heavy_check_mark: | - | |
 | Debian    | Debian        | :heavy_check_mark: | 10, 11 | |
 |           | Ubuntu        | :heavy_check_mark: | 18.04, 20.04 | |
 | RedHat    | Almalinux     | :heavy_check_mark: | 8 | |
 |           | Amazonlinux   | :x: | - | not tested, image not working |
-|           | Centos        | :heavy_check_mark: | 7, 8 | |
+|           | Centos        | :heavy_check_mark: | 8 | |
 |           | Fedora        | :heavy_check_mark: | 33, 34, Rawhide | |
 |           | Oraclelinux   | :heavy_check_mark: | 7, 8 | |
 | Suse      | OpenSuse Leap | :heavy_check_mark: | 15.1, 15.2, 15.3 | |
