@@ -1,7 +1,8 @@
 ---
-# role: ansible-role-common
-# file: requirements.yml
+# role: jomrr.common
+# file: meta/requirements.yml
 
-collections: []
+collections:
+  - {'name': 'community.general'}
 
 roles: []
